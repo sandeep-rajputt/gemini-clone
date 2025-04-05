@@ -5,18 +5,19 @@ import geminiResponseHandler from "../../config/gemainiResponseHandler";
 
 export const getGeminiData = createAsyncThunk(
   "main/getGeminiData",
-  async (prompt) => {
-    const data = await runChat(prompt);
-
-    return geminiResponseHandler(data);
+  async ({ prompt, orignalChat }) => {
+    const data = await runChat(prompt, orignalChat);
+    return geminiResponseHandler(data, prompt);
   }
 );
+
 
 const slice = createSlice({
   name: "main",
   initialState: {
     isNav: false,
     chat: [],
+    orignalChat: [],
     isChat: false,
     scroll: "",
     question: "",
@@ -46,13 +47,23 @@ const slice = createSlice({
     handleScroll(state) {
       state.scroll = reactUniqueIds();
     },
-    // updateChat(state, action) {
-    //   state.chat[state.chat.length - 1].content = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder.addCase(getGeminiData.fulfilled, (state, action) => {
-      state.chat[state.chat.length - 1].content = action.payload;
+      state.chat[state.chat.length - 1].content = action.payload.customResponse;
+      const newPrompt = {
+          role: "user",
+          parts: [
+            {text: action.payload.prompt},
+          ],
+      }
+      const newResponse ={
+        role: "model",
+        parts: [
+          {text: action.payload.customResponse},
+        ],
+      }
+      state.orignalChat = [...state.orignalChat, newPrompt, newResponse];
     });
   },
 });

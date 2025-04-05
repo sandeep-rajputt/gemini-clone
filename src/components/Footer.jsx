@@ -8,15 +8,21 @@ import { handleChat } from "../Strore/Slices";
 import { handleScroll } from "../Strore/Slices";
 import { handleIsChat } from "../Strore/Slices";
 import FooterBtn from "./mini-components/FooterBtn";
+import { useSelector } from "react-redux";
+
+
+
 
 const Footer = () => {
   const [inputData, setInputData] = useState("");
   const [isInput, setIsInput] = useState(false);
   const dispatch = useDispatch();
+  const { orignalChat } = useSelector((state) => state.main);
+  
 
   function handleSubmit() {
     if (inputData) {
-      dispatch(getGeminiData(inputData));
+      dispatch(getGeminiData({ prompt: inputData, orignalChat }));
       dispatch(handleChat(inputData));
       dispatch(handleScroll());
       dispatch(handleIsChat(true));

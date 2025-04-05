@@ -1,4 +1,4 @@
-export default function geminiResponseHandler(data) {
+export default function geminiResponseHandler(data, prompt) {
   let regex = /^\d+/; // start with a number
   const response = data.split("\n\n");
   let returnData = "";
@@ -341,5 +341,5 @@ export default function geminiResponseHandler(data) {
     }
   }
 
-  return returnData;
+  return {customResponse: returnData, orignalResponse: data, prompt: prompt};
 }
