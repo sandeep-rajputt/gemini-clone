@@ -14,7 +14,7 @@ const SuggestedItem = ({ prompt, title }) => {
   return (
     <button
       onClick={() => {
-        dispatch(getGeminiData(prompt));
+        dispatch(getGeminiData({ prompt: prompt }));
         dispatch(handleChat(prompt));
         dispatch(handleScroll());
         dispatch(handleIsChat(true));

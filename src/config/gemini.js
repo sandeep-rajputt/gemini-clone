@@ -15,9 +15,9 @@ const model = genAI.getGenerativeModel({
 const runChat = async (prompt, history = []) => {
   try {
     const chat = model.startChat({
-      history: history.map(msg => ({
+      history: history.map((msg) => ({
         role: msg.role,
-        parts: msg.parts
+        parts: msg.parts,
       })),
     });
 
@@ -25,8 +25,7 @@ const runChat = async (prompt, history = []) => {
     const response = await result.response;
     return response.text();
   } catch (error) {
-    console.error("Gemini API Error:", error);
-    throw new Error("Failed to get response from Gemini");
+    throw new Error("Failed to get response from Server");
   }
 };
 

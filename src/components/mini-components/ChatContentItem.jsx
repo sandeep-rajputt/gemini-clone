@@ -26,6 +26,11 @@ const ChatContentItem = ({ data }) => {
         <div className="px-2 md:px-0 overflow-x-auto">
           {data.content === "pending" ? (
             <Loader />
+          ) : data.content.startsWith("Error: ") ? (
+            <div
+              className="text-red-500"
+              dangerouslySetInnerHTML={{ __html: data.content }}
+            />
           ) : (
             <div dangerouslySetInnerHTML={{ __html: data.content }} />
           )}

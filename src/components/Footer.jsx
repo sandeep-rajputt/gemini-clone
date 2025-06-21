@@ -1,7 +1,7 @@
 import { BiImageAdd } from "react-icons/bi";
 import { HiMicrophone } from "react-icons/hi2";
 import { IoSend } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getGeminiData } from "../Strore/Slices";
 import { handleChat } from "../Strore/Slices";
@@ -10,15 +10,11 @@ import { handleIsChat } from "../Strore/Slices";
 import FooterBtn from "./mini-components/FooterBtn";
 import { useSelector } from "react-redux";
 
-
-
-
 const Footer = () => {
   const [inputData, setInputData] = useState("");
-  const [isInput, setIsInput] = useState(false);
   const dispatch = useDispatch();
-  const { orignalChat } = useSelector((state) => state.main);
-  
+  const { chat, orignalChat } = useSelector((state) => state.main);
+  const [showSubmitButton, setShowInputButton] = useState(chat.length > 0);
 
   function handleSubmit() {
     if (inputData) {
@@ -27,16 +23,25 @@ const Footer = () => {
       dispatch(handleScroll());
       dispatch(handleIsChat(true));
       setInputData("");
-      setIsInput(false);
     }
   }
+
+  useEffect(() => {
+    if (chat.length > 0 && chat[chat.length - 1].content === "pending") {
+      setShowInputButton(false);
+    } else if (inputData.trim().length > 0) {
+      setShowInputButton(true);
+    } else {
+      setShowInputButton(false);
+    }
+  }, [chat, inputData]);
 
   return (
     <>
       <div className="flex px-3 flex-col gap-3  max-w-[830px] m-auto">
         <div
           className={`grid ${
-            isInput
+            showSubmitButton
               ? "grid-cols-[1fr_auto_auto_auto]"
               : "grid-cols-[1fr_auto_auto]"
           } gap-2 w-full bg-light-dark-2 px-5 py-3 md:py-2 rounded-full md:px-3`}
@@ -46,13 +51,23 @@ const Footer = () => {
             value={inputData}
             onKeyUp={(e) => {
               if (inputData && e.key === "Enter") {
-                handleSubmit();
-                setIsInput(false);
+                if (chat.length > 0) {
+                  if (chat[chat.length - 1].content !== "pending") {
+                    handleSubmit();
+                    setShowInputButton(false);
+                  }
+                } else {
+                  handleSubmit();
+                  setShowInputButton(false);
+                }
               }
             }}
             onChange={(e) => {
               setInputData(e.target.value);
-              setIsInput(e.target.value.trim().length > 0);
+              setShowInputButton(
+                e.target.value.trim().length > 0 &&
+                  chat[chat.length - 1].content !== "pending"
+              );
             }}
             className="w-full bg-transparent focus:outline-none text-primary"
           />
@@ -63,7 +78,7 @@ const Footer = () => {
             <FooterBtn title={"Use Microphone"}>
               <HiMicrophone size={"1.4em"} />
             </FooterBtn>
-            {isInput && (
+            {showSubmitButton && (
               <FooterBtn title={"Submit"} clickHandler={handleSubmit}>
                 <IoSend size={"1.4em"} />
               </FooterBtn>
@@ -73,7 +88,7 @@ const Footer = () => {
         <div>
           <p className="text-xs text-center text-white">
             Gemini may display inaccurate info, including about people, so
-            double-check its responses.{" "}
+            double-check its responses.
             <span className="underline">Your privacy and Gemini Apps</span>
           </p>
         </div>

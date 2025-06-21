@@ -341,5 +341,5 @@ export default function geminiResponseHandler(data, prompt) {
     }
   }
 
-  return {customResponse: returnData, orignalResponse: data, prompt: prompt};
+  return { customResponse: returnData, orignalResponse: data, prompt: prompt };
 }

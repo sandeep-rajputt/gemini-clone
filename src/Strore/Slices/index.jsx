@@ -11,7 +11,6 @@ export const getGeminiData = createAsyncThunk(
   }
 );
 
-
 const slice = createSlice({
   name: "main",
   initialState: {
@@ -52,18 +51,19 @@ const slice = createSlice({
     builder.addCase(getGeminiData.fulfilled, (state, action) => {
       state.chat[state.chat.length - 1].content = action.payload.customResponse;
       const newPrompt = {
-          role: "user",
-          parts: [
-            {text: action.payload.prompt},
-          ],
-      }
-      const newResponse ={
+        role: "user",
+        parts: [{ text: action.payload.prompt }],
+      };
+      const newResponse = {
         role: "model",
-        parts: [
-          {text: action.payload.customResponse},
-        ],
-      }
+        parts: [{ text: action.payload.customResponse }],
+      };
       state.orignalChat = [...state.orignalChat, newPrompt, newResponse];
+    });
+    // handle if error
+    builder.addCase(getGeminiData.rejected, (state, action) => {
+      state.chat[state.chat.length - 1].content =
+        "Error: " + action.error.message;
     });
   },
 });
