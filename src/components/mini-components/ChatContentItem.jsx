@@ -1,4 +1,5 @@
 import Loader from "./Loader";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 const ChatContentItem = ({ data }) => {
   return (
@@ -32,7 +33,7 @@ const ChatContentItem = ({ data }) => {
               dangerouslySetInnerHTML={{ __html: data.content }}
             />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: data.content }} />
+            <MarkdownRenderer content={data.content} />
           )}
         </div>
       </div>

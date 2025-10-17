@@ -1,7 +1,7 @@
 import Tooltip from "@mui/material/Tooltip";
 import { MdOutlineAdd } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { handleIsChat, emptyChat } from "../../Strore/Slices";
+import { handleIsChat, emptyChat } from "../../Store/Slices";
 
 const NewChatBtn = () => {
   const { isNav, isChat } = useSelector((state) => state.main);

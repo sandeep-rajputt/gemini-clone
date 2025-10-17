@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import runChat from "../../config/gemini";
 import reactUniqueIds from "react-unique-ids";
-import geminiResponseHandler from "../../config/gemainiResponseHandler";
 
 export const getGeminiData = createAsyncThunk(
   "main/getGeminiData",
   async ({ prompt, orignalChat }) => {
     const data = await runChat(prompt, orignalChat);
-    return geminiResponseHandler(data, prompt);
+    return { content: data, prompt: prompt };
   }
 );
 
@@ -49,14 +48,14 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getGeminiData.fulfilled, (state, action) => {
-      state.chat[state.chat.length - 1].content = action.payload.customResponse;
+      state.chat[state.chat.length - 1].content = action.payload.content;
       const newPrompt = {
         role: "user",
         parts: [{ text: action.payload.prompt }],
       };
       const newResponse = {
         role: "model",
-        parts: [{ text: action.payload.customResponse }],
+        parts: [{ text: action.payload.content }],
       };
       state.orignalChat = [...state.orignalChat, newPrompt, newResponse];
     });

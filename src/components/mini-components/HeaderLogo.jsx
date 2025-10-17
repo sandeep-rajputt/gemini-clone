@@ -2,7 +2,7 @@ import { FaCaretDown } from "react-icons/fa";
 import HeaderBtn from "./HeaderBtn";
 import { MdMenu } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { openCloseNav } from "../../Strore/Slices";
+import { openCloseNav } from "../../Store/Slices";
 
 const HeaderLogo = () => {
   const dispatch = useDispatch();

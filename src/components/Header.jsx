@@ -6,7 +6,7 @@ import { IoMdAdd } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { emptyChat, handleIsChat } from "../Strore/Slices";
+import { emptyChat, handleIsChat } from "../Store/Slices";
 
 const Header = () => {
   // eslint-disable-next-line no-unused-vars

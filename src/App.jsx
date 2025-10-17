@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MainPage from "./components/MainPage";
 import Sidebar from "./components/Sidebar";
 import { useState, useEffect } from "react";
-import { openCloseNav } from "./Strore/Slices";
+import { openCloseNav } from "./Store/Slices";
 import { HowItWorks } from "./components/mini-components/HowItWorks";
 
 function App() {

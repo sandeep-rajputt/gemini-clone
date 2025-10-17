@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import NewChatBtn from "./mini-components/NewChatBtn";
 import Recent from "./mini-components/Recent";
 import { useDispatch } from "react-redux";
-import { openCloseNav } from "../Strore/Slices";
+import { openCloseNav } from "../Store/Slices";
 import Controls from "./mini-components/Controls";
 import { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";

@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-import { getGeminiData } from "../../Strore/Slices";
+import { getGeminiData } from "../../Store/Slices";
 import { VscLightbulbSparkle } from "react-icons/vsc";
 import { FaCode } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 import { MdOutlineSportsBasketball } from "react-icons/md";
-import { handleChat } from "../../Strore/Slices";
-import { handleScroll } from "../../Strore/Slices";
-import { handleIsChat } from "../../Strore/Slices";
+import { handleChat } from "../../Store/Slices";
+import { handleScroll } from "../../Store/Slices";
+import { handleIsChat } from "../../Store/Slices";
 
 const SuggestedItem = ({ prompt, title }) => {
   const dispatch = useDispatch();

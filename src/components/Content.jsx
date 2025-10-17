@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import SuggestedItem from "./mini-components/SuggestedItem";
 
 import { TiWarning } from "react-icons/ti";
-import { setHowWork } from "../Strore/Slices";
+import { setHowWork } from "../Store/Slices";
 import { useState } from "react";
 
 const Content = () => {

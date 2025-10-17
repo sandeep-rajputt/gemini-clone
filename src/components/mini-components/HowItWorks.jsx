@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setHowWork } from "../../Strore/Slices";
+import { setHowWork } from "../../Store/Slices";
 
 export const HowItWorks = () => {
   const dispatch = useDispatch();

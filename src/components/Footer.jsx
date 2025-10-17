@@ -3,10 +3,10 @@ import { HiMicrophone } from "react-icons/hi2";
 import { IoSend } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getGeminiData } from "../Strore/Slices";
-import { handleChat } from "../Strore/Slices";
-import { handleScroll } from "../Strore/Slices";
-import { handleIsChat } from "../Strore/Slices";
+import { getGeminiData } from "../Store/Slices";
+import { handleChat } from "../Store/Slices";
+import { handleScroll } from "../Store/Slices";
+import { handleIsChat } from "../Store/Slices";
 import FooterBtn from "./mini-components/FooterBtn";
 import { useSelector } from "react-redux";
 
